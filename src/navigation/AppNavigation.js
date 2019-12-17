@@ -6,6 +6,7 @@ import { createStackNavigator } from "react-navigation-stack"
 
 import { MainScreen } from "../screens/MainScreen"
 import { PostScreen } from "../screens/PostScreen"
+import { THEME } from "../theme"
 
 
 const PostNavigator = createStackNavigator({
@@ -14,8 +15,16 @@ const PostNavigator = createStackNavigator({
         screen: PostScreen            //
     }
 },
-    // {initialRouteName: "Post"} // второй параметр "createStackNavigator" указывает 
-)                               // .... какой экран по умолчанию загрузится первым
+    {
+        initialRouteName: "Main", // второй параметр "createStackNavigator" указывает // .... какой экран по умолчанию загрузится первым
+        defaultNavigationOptions: {     //  опции для все зарегистрированых скринов
+            headerStyle: {
+                backgroundColor: THEME.MAIN_COLOR
+            },
+            headerTintColor: "#fff"
+        }
+    }
+)                               
 // наполняем "createStackNavigator" всеми скринами, присваиваем переменную,
 // и помещаем это все в "createAppContainer" чтоб пользоватся этим по всему приложению
 

@@ -1,5 +1,7 @@
 import React from "react"
-import { View, Text, StyleSheet, Button } from "react-native"
+import { View, Text, StyleSheet, Button, FlatList } from "react-native"
+import { DATA } from "../data" // Импортируем самодельную базу данных бузадынных
+import { Post } from "../components/Post"
 
 
 export const MainScreen = ({ navigation }) => { 
@@ -11,9 +13,12 @@ export const MainScreen = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.center} >
-            <Text>MainScreen</Text>
-            <Button title="Go to Post" onPress={goToPost} />
+        <View style={styles.wrapper} >
+            < FlatList 
+                data={DATA} 
+                keyExtractor={post => post.id.toString()}
+                renderItem = {({item}) => <Post post={item}/>}
+            />
         </View>
     )
 }
@@ -29,5 +34,8 @@ const styles  = StyleSheet.create({
         flex: 1,
         justifyContent: "center", // выровнять по вертикале
         alignItems: "center"      // выровнять по горизотнале
+    },
+    wrapper: {
+        padding: 10
     }
 })
