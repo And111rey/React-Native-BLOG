@@ -8,8 +8,10 @@ export const MainScreen = ({ navigation }) => {
 // "MainScreen" уже был обвернутый в "createStackNavigator", автоматически к нему в пропсы приходит метод "navigation"
 // у метода "navigation" есть свойство "navigate", певый параметр которого...
 //... это открыть который ми регистрировали в "createStackNavigator" 
-    const goToPost = () => {
-        navigation.navigate("Post")
+    
+    const openPostHandler = (post) => { // приходит полный список параметров, которые прописаны в база данных     
+        navigation.navigate("Post", {postId: post.id, date: post.date}) // 
+        console.log(post)
     }
 
     return (
@@ -17,7 +19,8 @@ export const MainScreen = ({ navigation }) => {
             < FlatList 
                 data={DATA} 
                 keyExtractor={post => post.id.toString()}
-                renderItem = {({item}) => <Post post={item}/>}
+                renderItem = {({item}) => <Post post={item}
+                onOpen={openPostHandler}/>}
             />
         </View>
     )
