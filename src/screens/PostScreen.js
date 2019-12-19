@@ -14,8 +14,20 @@ export const PostScreen = ({navigation}) => {
     // onPress={()=>{goBack()}} реализируем метод "goBack()"
 
     const removeHandler =() => {
-        Alert.alert("Do yo wanna remowe this post?")
+        Alert.alert( 
+        'УДАЛЕНИЕ',
+        'Вы точно хотыте удалить пост?',
+        [
+          {
+            text: 'Отмена',
+            // onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'УДАЛИТЬ', onPress: () => {}},
+        ],
+        {cancelable: false},)
     }
+
 
     return (
         <ScrollView>
