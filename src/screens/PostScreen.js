@@ -1,8 +1,11 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { View, Text, StyleSheet, Button, Image, ScrollView, Alert } from "react-native"
 import {DATA} from "../data"
 import { THEME } from "../theme"
+import { AppHeaderIcon } from "../components/AppHeaderIcon"
 
+
+import { Item, HeaderButtons } from "react-navigation-header-buttons"
 
 export const PostScreen = ({navigation}) => {
 
@@ -10,6 +13,10 @@ export const PostScreen = ({navigation}) => {
     
     const post =DATA.find( p => p.id  === postId)
     
+    // useEffect(() => {
+    //     navigation.setParams({ booked: post.booled })
+    // }, [])
+
     // const { goBack } = navigation; // импортируем метод goBack
     // onPress={()=>{goBack()}} реализируем метод "goBack()"
 
@@ -44,9 +51,17 @@ export const PostScreen = ({navigation}) => {
 
 // для работы со скринами 
 PostScreen.navigationOptions = ({navigation}) => {
+    
     const date = navigation.getParam("date") // "getParam" -->> взять параметр 
+    const booked = navigation.getParam("booked")
+    const iconName = booked? "ios-star": "ios-star-outline" 
 
-    return {headerTitle: "Пост от " + new Date(date).toLocaleDateString()}        // данныйметод отвечает за  "title" скрина 
+    return {headerTitle: "Пост от " + new Date(date).toLocaleDateString(),        // данныйметод отвечает за  "title" скрина 
+            headerRight: (<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item title="Take photo" iconName={iconName} onPress={()=>console.log("Press photo")}/>
+            </HeaderButtons>
+),
+    }
 }
 
 const styles  = StyleSheet.create({
