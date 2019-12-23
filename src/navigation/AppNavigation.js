@@ -6,6 +6,8 @@ import { createStackNavigator } from "react-navigation-stack"
 
 import { createBottomTabNavigator } from "react-navigation-tabs"
 import { Ionicons } from "@expo/vector-icons"
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs"
+
 import { MainScreen } from "../screens/MainScreen"
 import { PostScreen } from "../screens/PostScreen"
 import { THEME } from "../theme"
@@ -48,18 +50,35 @@ const BookedNavigator = createStackNavigator({
 }
 )
 
-const BottomNavigator = createBottomTabNavigator({
+const bootomTabsConfig = {
     Post: {
         screen: PostNavigator,
         navigationOptions: {
+            tabBarLabel: "Все",
             tabBarIcon: <Ionicons name="ios-albums" size={25} />
         }
     },
     Booked: {
         screen: BookedNavigator,
         navigationOptions: {
+            tabBarLabel: "Избраное",
             tabBarIcon: < Ionicons name="ios-star" size={25} />
         }
+    }
+}
+
+const BottomNavigator = Platform.OS === "andoid"? createMaterialBottomTabNavigator(bottoTabsConfig, {
+    activeTintColor: "#fff",
+    shifting: true,
+    barStyle: {
+        backgroundColor: THEME.MAIN_COLOR
+    }
+}):  createBottomTabNavigator(
+
+    bootomTabsConfig,
+    {
+    tabBarOptions: {
+        activeTintColor: THEME.MAIN_COLOR
     }
 })
 

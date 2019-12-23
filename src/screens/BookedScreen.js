@@ -1,20 +1,58 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, Button, FlatList,  } from "react-native"
+import { HeaderButtons, Item } from "react-navigation-header-buttons"
+// "HeaderButtons" --->>для работы с кнопками-иконками в хедере
 
 
-export const BookedScreen = ({}) => {
+import { DATA } from "../data" // Импортируем самодельную базу данных бузадынных
+import { Post } from "../components/Post"
+import { AppHeaderIcon } from "../components/AppHeaderIcon"
+
+
+export const BookedScreen = ({ navigation }) => { 
+// "MainScreen" уже был обвернутый в "createStackNavigator", автоматически к нему в пропсы приходит метод "navigation"
+// у метода "navigation" есть свойство "navigate", певый параметр которого...
+//... это открыть который ми регистрировали в "createStackNavigator" 
+    
+    const openPostHandler = (post) => { // приходит полный список параметров, которые прописаны в база данных     
+        navigation.navigate("Post", {postId: post.id, date: post.date, booked: post.booked}) // 
+        console.log(post)
+    }
 
     return (
-        <View style={styles.center} >
-            <Text>BookedScreen</Text>
+        <View style={styles.wrapper} >
+            < FlatList 
+                data={DATA.filter(post=>post.booked)} // фильтруем те данные которые отвечают "booked = true"
+                keyExtractor={post => post.id.toString()}
+                renderItem = {({item}) => <Post post={item}
+                onOpen={openPostHandler}/>}
+            />
         </View>
+    )
+}
+
+
+// "MainScreen" уже был обвернутый в "createStackNavigator", по тому у немго появляется дополнителтный функционал
+BookedScreen.navigationOptions = {    // данный скрин уже отрисуется с местом для ХЕДЕРА
+    headerTitle: "Избранное",         // Данное свойство дает возможность работать  с ХЕДЕРОМ    
+    headerLeft: (
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+            <Item
+                title="Toggle Drawer" 
+                iconName="ios-menu"
+                onPress={()=>console.log("Press photo")}
+            />
+        </HeaderButtons>
     )
 }
 
 const styles  = StyleSheet.create({
     center: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "center", // выровнять по вертикале
+        alignItems: "center"      // выровнять по горизотнале
+    },
+    wrapper: {
+        padding: 10
     }
 })
