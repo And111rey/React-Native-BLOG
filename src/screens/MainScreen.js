@@ -35,14 +35,22 @@ export const MainScreen = ({ navigation }) => {
 // "MainScreen" уже был обвернутый в "createStackNavigator", по тому у немго появляется дополнителтный функционал
 MainScreen.navigationOptions = {    // данный скрин уже отрисуется с местом для ХЕДЕРА
     headerTitle: "Мой блог",         // Данное свойство дает возможность работать  с ХЕДЕРОМ 
-    headerRight: (<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                    <Item title="Take photo" iconName="ios-camera" onPress={()=>console.log("Press photo")}/>
-                </HeaderButtons>
+    headerRight: (
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+            <Item 
+                title="Take photo"
+                iconName="ios-camera"
+                onPress={()=>console.log("Press photo")}/>
+        </HeaderButtons>
     ),
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                    <Item title="Toggle Drawer" iconName="ios-menu" onPress={()=>console.log("Press photo")}/>
-                </HeaderButtons>
+            <Item
+                title="Toggle Drawer" 
+                iconName="ios-menu"
+                onPress={()=>console.log("Press photo")}
+            />
+        </HeaderButtons>
     )
 }
 

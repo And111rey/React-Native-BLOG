@@ -13,12 +13,11 @@ export const PostScreen = ({navigation}) => {
     
     const post =DATA.find( p => p.id  === postId)
     
-    // useEffect(() => {
-    //     navigation.setParams({ booked: post.booled })
-    // }, [])
+    // useEffect(()=> {            //useEffect --->> выполняется после рендера компонента
+    //     navigation.setParams({booked: post.booked})
+    // }, []) // если пустой массив , то  компонент будет вызван один раз
 
-    // const { goBack } = navigation; // импортируем метод goBack
-    // onPress={()=>{goBack()}} реализируем метод "goBack()"
+
 
     const removeHandler =() => {
         Alert.alert( 
@@ -57,8 +56,13 @@ PostScreen.navigationOptions = ({navigation}) => {
     const iconName = booked? "ios-star": "ios-star-outline" 
 
     return {headerTitle: "Пост от " + new Date(date).toLocaleDateString(),        // данныйметод отвечает за  "title" скрина 
-            headerRight: (<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                <Item title="Take photo" iconName={iconName} onPress={()=>console.log("Press photo")}/>
+            headerRight: (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item 
+                    title="Take photo"
+                    iconName={iconName}
+                    onPress={()=>console.log("Press photo")}
+                />
             </HeaderButtons>
 ),
     }
