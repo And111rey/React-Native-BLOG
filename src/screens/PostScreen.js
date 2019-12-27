@@ -1,21 +1,21 @@
 import React from 'react' 
 import { View, Text, StyleSheet, Button } from 'react-native'
 
-export const PostScreen = ({}) => {
+export const PostScreen = ({ navigation }) => {
 
-    const goToPost = () => {
-        
+    const goBack = () => {
+        navigation.push("Main")
     }
     return (
         <View style={style.center} >
             <Text>PostScreen</Text>
-            <Button title="Go To Post" onPress={goToPost}  />
+            <Button title="Go To Post" onPress={goBack}  />
         </View>
     )
 }
 
 PostScreen.navigationOptuins = {
-    header: "Мой НОМЕР 49"
+    headerTitle: "Мой НОМЕР 49"
 }
 
 const style = StyleSheet.create({
