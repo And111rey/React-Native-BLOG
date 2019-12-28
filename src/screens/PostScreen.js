@@ -14,8 +14,12 @@ export const PostScreen = ({ navigation }) => {
     )
 }
 
-PostScreen.navigationOptuins = {
-    headerTitle: "Мой НОМЕР 49"
+PostScreen.navigationOptions = {
+    headerTitle: "Мой НОМЕР 49",
+    headerStyle: {
+        backgroundColor: "red",
+    },
+    headerTintColor: "#fff" 
 }
 
 const style = StyleSheet.create({
