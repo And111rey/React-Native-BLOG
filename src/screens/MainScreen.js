@@ -6,8 +6,8 @@ import { Post } from '../conponents/Post'
 
 export const MainScreen = ({navigation}) => {
     
-    const goToPOst = () => {
-        navigation.navigate("Post")
+    const openPostHandler = (post) => { // функуия которая передает строку "Post" в navigation.navigate
+        navigation.navigate("Post", { postId: post.id, date: post.date })     //.. и эти переключает на скрин с ключем "Post"
     }
     
     return (
@@ -15,7 +15,8 @@ export const MainScreen = ({navigation}) => {
             <FlatList 
                 data={DATA}
                 keyExtractor={post => post.id.toString()}
-                renderItem={({item}) => {return < Post post={item} />}}
+                onOpen={openPostHandler}
+                renderItem={({item}) => {return < Post post={item} onOpen={openPostHandler}/>}}
             />
         </View>
     )

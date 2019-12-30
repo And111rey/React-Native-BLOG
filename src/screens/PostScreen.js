@@ -3,23 +3,24 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 
 export const PostScreen = ({ navigation }) => {
 
-    const goBack = () => {
-        navigation.push("Main")
-    }
+    const postId = navigation.getParam("postId")
+    console.log("first**** ",postId)
     return (
         <View style={style.center} >
-            <Text>PostScreen</Text>
-            <Button title="Go To Post" onPress={goBack}  />
+            <Text>{postId}</Text>
+            {/* <Button title="Go To Post" onPress={goBack}  /> */}
         </View>
     )
 }
 
-PostScreen.navigationOptions = {
-    headerTitle: "Мой НОМЕР 49",
-    headerStyle: {
-        backgroundColor: "red",
-    },
-    headerTintColor: "#fff" 
+PostScreen.navigationOptions = ({navigation}) => {
+    const date = navigation.getParam("date")
+    console.log("dddd ", date)
+    return {
+        headerTitle: `Пост от ${new Date(date).toLocaleDateString()}`
+        // headerTitle: "Мой НОМЕР " + {date}
+
+    } 
 }
 
 const style = StyleSheet.create({
