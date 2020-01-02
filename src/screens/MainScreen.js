@@ -19,7 +19,7 @@ export const MainScreen = ({navigation}) => {
     return  <PostList data={DATA} onOpen={openPostHandler} />
 }
 
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({navigation}) => ({
     headerTitle: "Мой Блог",
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
@@ -28,13 +28,8 @@ MainScreen.navigationOptions = {
         ),
     headerLeft:(
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item title="Toggle Rover" iconName="ios-menu" onPress={()=>{console.log("PRESS PHOTO")}}/>
+            <Item title="Toggle Rover" iconName="ios-menu" onPress={()=> navigation.toggleDrawer()}/>
         </HeaderButtons>
         )
-}
+})
 
-// const style = StyleSheet.create({
-//     wraper: {
-//         padding: 10
-//     },
-// })

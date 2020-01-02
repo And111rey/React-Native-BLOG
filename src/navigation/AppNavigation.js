@@ -7,8 +7,11 @@ import { Ionicons } from "@expo/vector-icons"
 import { MainScreen } from '../screens/MainScreen' 
 import { PostScreen } from '../screens/PostScreen'
 import { BookedScreen } from "../screens/BookedScreen"
-import {Platform} from 'react-native'
+import { Platform } from 'react-native'
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs"
+import { createDrawerNavigator } from "react-navigation-drawer"
+import { AboutScreen } from "../screens/AboutScreen"
+import { CreateScreen } from "../screens/CreateScreen"
 
 // console.log(Platform)
 
@@ -68,4 +71,16 @@ const BottomNavigator = Platform.OS === 'android'
     }
 })
 
-export const AppNavigation = createAppContainer(BottomNavigator)
+const MainNavigator = createDrawerNavigator({
+    PostTabs: {
+        screen: BottomNavigator
+    },
+    About: {
+        screen: AboutScreen
+    },
+    CreateScreen: {
+        screen: CreateScreen
+    }
+})
+
+export const AppNavigation = createAppContainer(MainNavigator)
