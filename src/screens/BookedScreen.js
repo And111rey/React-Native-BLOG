@@ -1,11 +1,10 @@
 import React from 'react' 
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native'
 import {DATA} from '../data'
 import { HeaderButtons, Item} from 'react-navigation-header-buttons'
 
 
-import { Post } from '../conponents/Post'
 import { AppHeaderIcon } from '../conponents/AppHeaderIcon'
+import { PostList } from '../conponents/PostList'
 
 export const BookedScreen = ({navigation}) => {
     
@@ -16,16 +15,10 @@ export const BookedScreen = ({navigation}) => {
                                     })     //.. и эти переключает на скрин с ключем "Post"
     }
     
-    return (
-        <View style={style.wraper} >
-            <FlatList 
-                data={DATA.filter(post => post.bookd )}
-                keyExtractor={post => post.id.toString()}
+    return < PostList 
+                data={DATA.filter(post => post.booken)} 
                 onOpen={openPostHandler}
-                renderItem={({item}) => {return < Post post={item} onOpen={openPostHandler}/>}}
             />
-        </View>
-    )
 }
 
 BookedScreen.navigationOptions = {
@@ -38,8 +31,3 @@ BookedScreen.navigationOptions = {
         )
 }
 
-const style = StyleSheet.create({
-    wraper: {
-        padding: 10
-    },
-})
