@@ -8,6 +8,7 @@ import { MainScreen } from '../screens/MainScreen'
 import { PostScreen } from '../screens/PostScreen'
 import { BookedScreen } from "../screens/BookedScreen"
 import {Platform} from 'react-native'
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs"
 
 // console.log(Platform)
 
@@ -38,7 +39,7 @@ const BookedNavigator = createStackNavigator({
         defaultNavigationOptions: {
             headerStyle: {
                 // backgroundColor: Platform.OS === 'android'? THEM.MAIN_COLOR:  "#fff"
-                backgroundColor: Platform.OS === 'android'? '#383838':  "#fff"
+                backgroundColor: Platform.OS === 'android'? THEM.MAIN_COLOR:  "#fff"
 
             },
             headerTintColor: Platform.OS === 'android'? "#fff":  "black"
@@ -46,22 +47,32 @@ const BookedNavigator = createStackNavigator({
     }   
 )
 
-const BottomNavigator = createBottomTabNavigator({
+const bottomTabsConfig = {
     Post: {
         screen: PostNavigator,
         navigationOptions: {
+            tabBarLabel: "Все",
             tabBarIcon: info => < Ionicons name="ios-albums" size={25} color={ info.tintColor } />
         }
     },
     Booked: {
         screen: BookedNavigator,
         navigationOptions:{
+            tabBarLabel: "Избранное",
             tabBarIcon: info => < Ionicons name="ios-star" size={25} color={info.tintColor} />
         }
     }
 
-},
-{
+}
+
+
+const BottomNavigator = Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(bottomTabsConfig, {
+        activeTintColor: "#fff",
+        shifting: true,
+        barStyle: THEM.MAIN_COLOR
+    })
+    : createBottomTabNavigator( bottomTabsConfig, {
     tabBarOptions: {
         activeTintColor: THEM.MAIN_COLOR
     }
