@@ -23,7 +23,7 @@ MainScreen.navigationOptions = ({navigation}) => ({
     headerTitle: "Мой Блог",
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item title="Take Foto" iconName="ios-camera" onPress={()=>{console.log("PRESS PHOTO")}}/>
+            <Item title="Take Foto" iconName="ios-camera" onPress={()=>navigation.push('Create')}/>
         </HeaderButtons>
         ),
     headerLeft:(

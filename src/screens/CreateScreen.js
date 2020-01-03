@@ -1,5 +1,7 @@
 import React from 'react' 
 import { View, Text, StyleSheet } from 'react-native'
+import { HeaderButtons, Item } from "react-navigation-header-buttons"
+import { AppHeaderIcon } from "../conponents/AppHeaderIcon"
 
 export const CreateScreen = ({}) => {
     return (
@@ -15,4 +17,13 @@ const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     }
+})
+
+CreateScreen.navigationOptions = ({navigation}) => ({
+    headerTitle: "Создать пост",
+    headerLeft:(
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+            <Item title="Toggle Rover" iconName="ios-menu" onPress={()=> navigation.toggleDrawer()}/>
+        </HeaderButtons>
+        )
 })
