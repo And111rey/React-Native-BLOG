@@ -5,8 +5,9 @@ import { AppHeaderIcon } from "../conponents/AppHeaderIcon"
 
 export const AboutScreen = ({}) => {
     return (
-        <View style={style.center} >
-            <Text>AboutScreen</Text>
+        <View style={styles.center} >
+            <Text>Это лутшее приложение для личных заметок</Text>
+            <Text>Версия приложения <Text style={styles.version}>1.0.0</Text></Text>
         </View>
     )
 }
@@ -21,10 +22,13 @@ AboutScreen.navigationOptions = ({navigation}) => ({
 })
 
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     center: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+    version: {
+        color: "green"
     }
 })

@@ -3,7 +3,6 @@ import {DATA} from '../data'
 import { HeaderButtons, Item} from 'react-navigation-header-buttons'
 
 
-import { Post } from '../conponents/Post'
 import { AppHeaderIcon } from '../conponents/AppHeaderIcon'
 import { PostList } from '../conponents/PostList'
 

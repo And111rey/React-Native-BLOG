@@ -21,13 +21,13 @@ export const BookedScreen = ({navigation}) => {
             />
 }
 
-BookedScreen.navigationOptions = {
+BookedScreen.navigationOptions = ({navigation}) => ({
     headerTitle: "Избранное",
 
     headerLeft:(
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item title="Toggle Rover" iconName="ios-menu" onPress={()=>{console.log("PRESS PHOTO")}}/>
+            <Item title="Toggle Rover" iconName="ios-menu" onPress={()=> navigation.toggleDawer()}/>
         </HeaderButtons>
         )
-}
+})
 

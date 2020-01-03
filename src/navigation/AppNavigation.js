@@ -12,6 +12,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import { createDrawerNavigator } from "react-navigation-drawer"
 import { AboutScreen } from "../screens/AboutScreen"
 import { CreateScreen } from "../screens/CreateScreen"
+// import {} from "../../assets/fonts/OpenSans-Bold.ttf'"
 
 // console.log(Platform)
 
@@ -81,13 +82,32 @@ const CreateNavigator = createStackNavigator({
 
 const MainNavigator = createDrawerNavigator({
     PostTabs: {
-        screen: BottomNavigator
+        screen: BottomNavigator,
+        navigationOptions: {
+            drawerLabel: "Главная",
+            // drawerIcon: < Ionicons name="ios-star"/>
+        }
     },
     About: {
-        screen: AboutNavigator
+        screen: AboutNavigator,
+        navigationOptions: {
+            drawerLabel: "О приложении",
+            // drawerIcon: < Ionicons name="ios-star"/>
+        }
     },
     CreateScreen: {
-        screen: CreateNavigator
+        screen: CreateNavigator,
+        navigationOptions: {
+            drawerLabel: "Новый пост",
+            // drawerIcon: < Ionicons name="ios-star"/>
+        }
+    }
+},{
+    contentOptions: {
+        activeTintColor: THEM.MAIN_COLOR,
+        labelStyle: {
+            fontFamily: "open-bold"
+        }
     }
 })
 
