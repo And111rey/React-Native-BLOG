@@ -1,21 +1,73 @@
-import React from 'react' 
-import { View, Text, StyleSheet } from 'react-native'
+import React, {useState} from 'react' 
+import { View, Text, StyleSheet, TextInput, Image, Button, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
 import { AppHeaderIcon } from "../conponents/AppHeaderIcon"
+import { THEM } from '../thems'
+import { useDispatch } from 'react-redux'
+import { addPost } from '../store/actions/post'
 
-export const CreateScreen = ({}) => {
+export const CreateScreen = ({navigation}) => {
+    const [text, setText] = useState('') 
+    const dispatch = useDispatch()
+
+    const img = "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg"
+
+    const saveHandler = () => {
+        const post = {
+            date: new Date().toJSON(),
+            text: text,
+            img: img,
+            booked: false
+        }
+        dispatch(addPost(post))
+        navigation.navigate('Main')
+    }
+
     return (
-        <View style={style.center} >
-            <Text>CreateScreen</Text>
-        </View>
-    )
+        <ScrollView style={styles.scroll}>
+            <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}} >
+            <View style={styles.wraper}>
+                <Text style={styles.title}>Создай новый пост</Text>
+                <TextInput
+                    style={styles.textArea}
+                    placeholder="Введите текст заметки"
+                    value={text}
+                    onChangeText={setText}
+                    multiline
+                />
+                <Image
+                    style={{ width: "100%", height: 200, marginBottom: 10 }}
+                    source={{
+                        uri: img
+                    }}
+                />
+                <Button
+                    title="Создать пост"
+                    color={THEM.MAIN_COLOR}
+                    onPress={saveHandler}
+                />
+            </View>
+            </TouchableWithoutFeedback>
+        </ScrollView>
+    );
 }
 
-const style = StyleSheet.create({
-    center: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+const styles = StyleSheet.create({
+    wraper: {
+        padding: 10
+    },
+    title: {
+        fontSize: 20,
+        textAlign: "center",
+        fontFamily: "open-regular",
+        marginVertical: 10
+    },
+    textArea: {
+        padding: 10,
+        marginBottom: 10
+    },
+    scroll: {
+        flex: 1
     }
 })
 

@@ -1,5 +1,6 @@
 import React from 'react' 
-import {DATA} from '../data'
+import { useSelector } from "react-redux"
+// import {DATA} from '../data'
 import { HeaderButtons, Item} from 'react-navigation-header-buttons'
 
 
@@ -15,8 +16,11 @@ export const BookedScreen = ({navigation}) => {
                                     })     //.. и эти переключает на скрин с ключем "Post"
     }
     
+    const bookedPosts = useSelector(state=> state.post.bookedPosts)
+    console.log(bookedPosts)
+
     return < PostList 
-                data={DATA.filter(post => post.booken)} 
+                data={bookedPosts} 
                 onOpen={openPostHandler}
             />
 }

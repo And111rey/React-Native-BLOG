@@ -1,8 +1,9 @@
-import React from 'react' 
-import {DATA} from '../data'
+import React,{useEffect} from 'react' 
+// import {DATA} from '../data'
 import { HeaderButtons, Item} from 'react-navigation-header-buttons'
+import { useDispatch, useSelector } from  "react-redux"
 
-
+import { loadPosts } from "../store/actions/post"
 import { AppHeaderIcon } from '../conponents/AppHeaderIcon'
 import { PostList } from '../conponents/PostList'
 
@@ -14,8 +15,15 @@ export const MainScreen = ({navigation}) => {
                                       booked: post.booked
                                     })     //.. и эти переключает на скрин с ключем "Post"
     }
-    
-    return  <PostList data={DATA} onOpen={openPostHandler} />
+
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(loadPosts())
+    }, [])
+    const allPosts = useSelector(state=> state.post.allPosts)
+
+    return  <PostList data={allPosts} onOpen={openPostHandler} />
 }
 
 MainScreen.navigationOptions = ({navigation}) => ({
