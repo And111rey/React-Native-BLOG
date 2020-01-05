@@ -23,6 +23,7 @@ export const CreateScreen = ({navigation}) => {
         }
         dispatch(addPost(post))
         navigation.navigate('Main')
+        console.log("ssssss", post)
     }
 
     const photoPickHendler = uri => {
