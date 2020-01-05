@@ -5,6 +5,7 @@ import { AppHeaderIcon } from "../conponents/AppHeaderIcon"
 import { THEM } from '../thems'
 import { useDispatch } from 'react-redux'
 import { addPost } from '../store/actions/post'
+import { PhotoPicker } from '../conponents/PhotoPicer'
 
 export const CreateScreen = ({navigation}) => {
     const [text, setText] = useState('') 
@@ -23,6 +24,10 @@ export const CreateScreen = ({navigation}) => {
         navigation.navigate('Main')
     }
 
+    const photoPickHendler = uri => {
+        
+    }
+
     return (
         <ScrollView style={styles.scroll}>
             <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}} >
@@ -35,12 +40,7 @@ export const CreateScreen = ({navigation}) => {
                     onChangeText={setText}
                     multiline
                 />
-                <Image
-                    style={{ width: "100%", height: 200, marginBottom: 10 }}
-                    source={{
-                        uri: img
-                    }}
-                />
+               <PhotoPicker onPick={photoPickHendler} />
                 <Button
                     title="Создать пост"
                     color={THEM.MAIN_COLOR}
