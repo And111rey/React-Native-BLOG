@@ -1,4 +1,4 @@
-import React, {useState} from 'react' 
+import React, {useState, useRef} from 'react' 
 import { View, Text, StyleSheet, TextInput, Image, Button, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
 import { AppHeaderIcon } from "../conponents/AppHeaderIcon"
@@ -10,14 +10,15 @@ import { PhotoPicker } from '../conponents/PhotoPicer'
 export const CreateScreen = ({navigation}) => {
     const [text, setText] = useState('') 
     const dispatch = useDispatch()
+    const imgRef = useRef()
 
-    const img = "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg"
+    // const img = "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg"
 
     const saveHandler = () => {
         const post = {
             date: new Date().toJSON(),
             text: text,
-            img: img,
+            img: imgRef.current,
             booked: false
         }
         dispatch(addPost(post))
@@ -25,7 +26,7 @@ export const CreateScreen = ({navigation}) => {
     }
 
     const photoPickHendler = uri => {
-        
+        imgRef.current = uri
     }
 
     return (
@@ -45,6 +46,7 @@ export const CreateScreen = ({navigation}) => {
                     title="Создать пост"
                     color={THEM.MAIN_COLOR}
                     onPress={saveHandler}
+                    disabled={!text} // блокинует кнопку на дисплее
                 />
             </View>
             </TouchableWithoutFeedback>
